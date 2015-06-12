@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -81,14 +81,14 @@ var Game = (function () {
                 }
             }
         }
-        
+
         if(result_array["HitNum"] === this.NUMBER_DIGITS){
             //すべてがhit状態である場合
             result_array["isResult"] = true;
         }else{
             result_array["isResult"] = false;
         }
-        
+
         return result_array;
     };
 
@@ -128,14 +128,14 @@ var Game = (function () {
             alert("正解です");
         }else{
             document.getElementById("history").value += this.guessTimes + "回目:" + guess_number + "　Hit:"+ result["HitNum"] + "　Blow:" + result["BlowNum"] + "\n";
-        }        
+        }
     };
 
     Game.prototype.answer = function () {
         var end = confirm("答えを表示した場合、ランキング登録はできませんが宜しいですか?");
         if (end === true) {
             alert("答えは" + this.target_number + "でした。\nOKボタンを押すと、新規でゲームがスタートします。");
-            location.reload();
+            window.location.href = window.location.href;
         }
     };
 
