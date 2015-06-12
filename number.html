@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <style>button{width:80%}</style>
+        <style>body{background-color: #c8bfe7}</style>
+
+        <script src="framework/js/prototype.js"></script>
+        <script src="js/game.js"></script>
+        <script>var game = new Game();</script>
+        <title>Numbers</title>
+    </head>
+
+    <body onload="game.init();">
+        <!-中央揃え-->
+        <div Align="center">
+            <form name="selbox">
+                <!-タイトル-->
+                <h1 style="font-size: 50px">Numbers</h1>
+                <!-以下終了コメントまでリスト-->
+                <fieldset id="guessNum" style="border: none">
+                    <select id="rank1" style="font-size: 40px">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+
+                    <select id="rank2"  style="font-size: 40px">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+
+
+                    <select id="rank3"  style="font-size: 40px">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+
+                    <select id="rank4"  style="font-size: 40px">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+
+                </fieldset>
+            </form>
+            <!-リスト定義終了-->
+
+            <br>
+            <!-ボタン-->
+            <button onclick="game.guess()" name="start" style="font-size: 32px;width:150px;height:70px">Guess</button>
+            <button onclick="game.answer()" id="ans" style="font-size: 32px; width:150px;height:70px">Answer</button>
+
+            <h2 style="font-size: 40px">履歴</h2>
+            <!-履歴のテキスト表示-->
+            <div id="flickable">
+                <textarea readonly id="history" NAME=ta COLS=30 ROWS=20 style="font-size:20px;"></textarea>
+            </div>
+            <!-中央揃え終わり-->
+        </div>
+
+    </body>
+</html>
