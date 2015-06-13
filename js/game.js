@@ -1,8 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+    Numbers#game.js
+
+    Copyright (c) 2015 Kentei-Syunrai
+
+    This software is released under the MIT License.
+    http://opensource.org/licenses/mit-license.php
+*/
 
 var Game = (function () {
     'use strict';
