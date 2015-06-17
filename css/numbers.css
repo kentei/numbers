@@ -1,0 +1,46 @@
+/**
+    Numbers#numbers.css
+
+    Copyright (c) 2015 Kentei-Syunrai
+
+    This software is released under the MIT License.
+    http://opensource.org/licenses/mit-license.php
+*/
+@charset "utf-8";
+
+body {
+  background-color: #c8bfe7;
+  text-align: center;
+}
+
+h1.title {
+  font-size: 50px;
+}
+
+h2.historyTitle {
+  font-size: 40px;
+}
+
+select.numSelectBox {
+  font-size: 40px;
+}
+
+div.buttonGroup {
+  margin-top: 30px;
+}
+
+button.guess {
+  font-size: 32px;
+  height: 70px;
+  width: 150px;
+}
+
+button.answer {
+  font-size: 32px;
+  height: 70px;
+  width: 150px;
+}
+
+textarea.historyContents {
+  font-size: 20px;
+}

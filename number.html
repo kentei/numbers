@@ -9,85 +9,25 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width">
-        <style>button{width:80%}</style>
-        <style>body{background-color: #c8bfe7}</style>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width">
+<link href="css/numbers.css" rel="stylesheet" type="text/css"></link>
 
-        <script src="framework/js/prototype.js"></script>
-        <script src="js/game.js"></script>
-        <title>Numbers</title>
-    </head>
+<script src="framework/js/prototype.js"></script>
+<script src="js/game.js"></script>
+<title>Numbers</title>
+</head>
 
-    <body>
-        <div Align="center">
-            <form name="selbox">
-                <h1 style="font-size: 50px">Numbers</h1>
-                <fieldset id="guessNum" style="border: none">
-                    <select id="rank1" style="font-size: 40px">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                    </select>
+<body>
+	<h1 class="title">Numbers</h1>
+	<div id="guessNum" style="border: none"></div>
+	<div class="buttonGroup">
+		<button id="guessButton" class="guess">Guess</button>
+		<button id="answerButton" class="answer">Answer</button>
+	</div>
 
-                    <select id="rank2"  style="font-size: 40px">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                    </select>
-
-
-                    <select id="rank3"  style="font-size: 40px">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                    </select>
-
-                    <select id="rank4"  style="font-size: 40px">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                    </select>
-
-                </fieldset>
-            </form>
-            <br>
-            <button id="guessButton" style="font-size: 32px;width:150px;height:70px">Guess</button>
-            <button id="answerButton" style="font-size: 32px; width:150px;height:70px">Answer</button>
-
-            <h2 style="font-size: 40px">履歴</h2>
-            <div id="flickable">
-                <textarea readonly id="history" NAME=ta COLS=30 ROWS=20 style="font-size:20px;"></textarea>
-            </div>
-        </div>
-    </body>
+	<h2 class="historyTitle">履歴</h2>
+	<textarea readonly id="history" class="historyContents" cols=30 rows=20></textarea>
+</body>
 </html>
