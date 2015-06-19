@@ -21,8 +21,13 @@ h2.historyTitle {
   font-size: 40px;
 }
 
+p.timeCounter {
+  font-size: 30px;
+}
+
 select.numSelectBox {
-  font-size: 40px;
+  font-size: 50px;
+  margin-right: 5px;
 }
 
 div.buttonGroup {
@@ -31,16 +36,17 @@ div.buttonGroup {
 
 button.guess {
   font-size: 32px;
-  height: 70px;
-  width: 150px;
+  height: 60px;
+  width: 120px;
 }
 
 button.answer {
   font-size: 32px;
-  height: 70px;
-  width: 150px;
+  height: 60px;
+  width: 120px;
 }
 
-textarea.historyContents {
+p.historyContents {
   font-size: 20px;
+  text-align: center;
 }
