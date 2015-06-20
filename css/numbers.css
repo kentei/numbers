@@ -15,14 +15,21 @@ body {
 
 h1.title {
   font-size: 50px;
+  display: block;
 }
 
 h2.historyTitle {
   font-size: 40px;
+  display: none;
 }
 
 p.timeCounter {
   font-size: 30px;
+  display: none;
+}
+
+div#guessNum{
+  /*display: none;*/
 }
 
 select.numSelectBox {
@@ -32,6 +39,7 @@ select.numSelectBox {
 
 div.buttonGroup {
   margin-top: 30px;
+  display: none;
 }
 
 button.guess {
@@ -44,6 +52,21 @@ button.answer {
   font-size: 32px;
   height: 60px;
   width: 120px;
+}
+
+button.selfPlayer {
+  font-size: 32px;
+  height: 60px;
+}
+
+button.twoPlayer {
+  font-size: 32px;
+  height: 60px;
+}
+
+button.ranking {
+  font-size: 32px;
+  height: 60px;
 }
 
 p.historyContents {

@@ -8,10 +8,52 @@
  */
 
 window.onload = function() {
-	var game = new Game();
-	game.init();
-  //setInterval("game.timeCount()",10);
+	var startMenu = new StartMenu();
+	startMenu.init();
 };
+
+(function() {
+	'use strict';
+	var StartMenu = function() {
+		this.init = function(){
+			addEvent();
+		};
+
+		/**
+		 * コンポーネントにイベントを追加する
+		 */
+		var addEvent = function() {
+			// ボタンイベント追加
+			var selfPlayerModeButton = document.querySelector('#selfPlayerModeButton');
+			selfPlayerModeButton.addEventListener("click", selfModeClick, false);
+			//TODO ランキングボタンや対戦モードボタンの追加
+		};
+
+		/**
+		 * 1Pモードボタンを押した時の動作
+		 */
+		var selfModeClick = function() {
+			changeDisplay("selfMode");
+			var game = new Game();
+			game.init();
+		};
+
+		/**
+		 * 別画面に移動したときのコンポーネントの表示切り替え
+		 * @param {String} 移動先の画面Id
+		 */
+		var changeDisplay = function(dispName) {
+			if(dispName === "selfMode"){
+				document.getElementsByClassName("startMenu")[0].style.display = "none";
+				document.getElementsByClassName("buttonGroup")[0].style.display = "block";
+				document.getElementsByClassName("historyTitle")[0].style.display = "block";
+				document.getElementsByClassName("timeCounter")[0].style.display = "block";
+			}
+		};
+	};
+
+	window.StartMenu = StartMenu;
+}());
 
 (function() {
 	'use strict';
@@ -24,54 +66,60 @@ window.onload = function() {
 			Game.target_number = createRandumNumber();
 			createNumSelectBox();
 			addEvent();
-      timeCountStartOrStop();  //スタート
-      Game.timer = setInterval(timeCount, 10);
+			timeCountStartOrStop();  //スタート
+			Game.timer = setInterval(timeCount, 10);
 		};
 
-    var timeCount = function(){
-      //現在時刻
-      var nowDate = new Date();
-      var hour = nowDate.getHours();
-      var minutes = nowDate.getMinutes();
-      var second = nowDate.getSeconds();
-      var milliSecond = Math.floor(nowDate.getMilliseconds() / 10);
-      var nowTime = hour * 60 * 60 * 100 + minutes * 60 * 100 + second * 100 + milliSecond;
+		/**
+		 * 経過時間を表示する処理
+		 */
+		var timeCount = function(){
+			//現在時刻
+			var nowDate = new Date();
+			var hour = nowDate.getHours();
+			var minutes = nowDate.getMinutes();
+			var second = nowDate.getSeconds();
+			var milliSecond = Math.floor(nowDate.getMilliseconds() / 10);
+			var nowTime = hour * 60 * 60 * 100 + minutes * 60 * 100 + second * 100 + milliSecond;
 
-      var time = nowTime - Game.startTime;
+			var time = nowTime - Game.startTime;
 
-      var h = Math.floor(time / (60 * 60 * 100));
-      time = time - (h * 60 * 60 * 100);
-      var m = Math.floor(time / (60 * 100));
-      time = time - (m * 60 * 100);
-      var s = Math.floor(time / 100);
-      var t = time % 100;
+			var h = Math.floor(time / (60 * 60 * 100));
+			time = time - (h * 60 * 60 * 100);
+			var m = Math.floor(time / (60 * 100));
+			time = time - (m * 60 * 100);
+			var s = Math.floor(time / 100);
+			var t = time % 100;
 
-      //経過時間が1桁であれば10の位に "0" を加える
-      var hs = (h < 10)? "0" + String(h): String(h);
-      var ms = (m < 10)? "0" + String(m): String(m);
-      var ss = (s < 10)? "0" + String(s): String(s);
-      var ts = (t < 10)? "0" + String(t): String(t);
+			//経過時間が1桁であれば10の位に "0" を加える
+			var hs = (h < 10)? "0" + String(h): String(h);
+			var ms = (m < 10)? "0" + String(m): String(m);
+			var ss = (s < 10)? "0" + String(s): String(s);
+			var ts = (t < 10)? "0" + String(t): String(t);
 
-      document.getElementsByClassName("timeCounter")[0].innerHTML = hs + ":" + ms + ":" + ss + "\'" + ts;
+			document.getElementsByClassName("timeCounter")[0].innerHTML = hs + ":" + ms + ":" + ss + "\'" + ts;
 
-    };
+		};
 
-    var timeCountStartOrStop = function() {
-      if(Game.onStart){
-        //スタート時刻を設定する
-        var startDate = new Date();
-        var hour = startDate.getHours();
-        var minutes = startDate.getMinutes();
-        var second = startDate.getSeconds();
-        var milliSecond = Math.floor(startDate.getMilliseconds() / 10);
-        Game.startTime = hour * 60 * 60 * 100 + minutes * 60 * 100 + second * 100 + milliSecond;
-        Game.onStart = false;
-      }else{
-        //終了の場合
-        clearInterval(Game.timer);
-      }
+		/**
+		 * 時間計測を開始、または停止する
+		 */
+		var timeCountStartOrStop = function() {
+			if(Game.onStart){
+				//スタート時刻を設定する
+				var startDate = new Date();
+				var hour = startDate.getHours();
+				var minutes = startDate.getMinutes();
+				var second = startDate.getSeconds();
+				var milliSecond = Math.floor(startDate.getMilliseconds() / 10);
+				Game.startTime = hour * 60 * 60 * 100 + minutes * 60 * 100 + second * 100 + milliSecond;
+				Game.onStart = false;
+			}else{
+				//終了の場合
+				clearInterval(Game.timer);
+			}
 
-    };
+		};
 
 		/**
 		 * 数値選択ボックスを作成する
@@ -155,9 +203,9 @@ window.onload = function() {
 			var guess_number_array = guess_number.split('');
 
 			var result_array = {
-				"isResult" : false,
-				"HitNum" : 0,
-				"BlowNum" : 0
+					"isResult" : false,
+					"HitNum" : 0,
+					"BlowNum" : 0
 			};
 
 			for (var i = 0; i < Game.prototype.NUMBER_DIGITS; i++) {
@@ -221,12 +269,12 @@ window.onload = function() {
 			var result = matching(Game.target_number, guess_number);
 			Game.guessTimes += 1;
 			if (result["isResult"]) {
-        timeCountStartOrStop();
+				timeCountStartOrStop();
 				alert("正解です");
 			} else {
 				document.getElementById("history").innerHTML += Game.guessTimes
-						+ "回目:" + guess_number + "　Hit:" + result["HitNum"]
-						+ "　Blow:" + result["BlowNum"] + "<br>";
+				+ "回目:" + guess_number + "　Hit:" + result["HitNum"]
+				+ "　Blow:" + result["BlowNum"] + "<br>";
 			}
 		};
 
@@ -236,7 +284,7 @@ window.onload = function() {
 		var answer = function() {
 			var end = confirm("答えを表示した場合、ランキング登録はできませんが宜しいですか?");
 			if (end === true) {
-        timeCountStartOrStop();
+				timeCountStartOrStop();
 				alert("答えは" + Game.target_number
 						+ "でした。\nOKボタンを押すと、新規でゲームがスタートします。");
 				window.location.href = window.location.href;
@@ -250,11 +298,11 @@ window.onload = function() {
 	Game.target_number;
 	// 推測回数(static)
 	Game.guessTimes = 0;
-  // スタートかどうか(static)
+	// スタートかどうか(static)
 	Game.onStart = true;
-  // スタートの時間
-  Game.startTime;
-  Game.timer;
+	// スタートの時間
+	Game.startTime;
+	Game.timer;
 
 	window.Game = Game;
 }());
