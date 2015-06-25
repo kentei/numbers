@@ -12,6 +12,9 @@ window.onload = function() {
 	startMenu.init();
 };
 
+/**
+ * TODO クラスはソース1つ1つに分けたいな。あとで圧縮して1つにする感じ(´・ω・`)
+ */
 (function() {
 	'use strict';
 	var StartMenu = function() {
@@ -125,19 +128,72 @@ window.onload = function() {
 		 * 数値選択ボックスを作成する
 		 */
 		var createNumSelectBox = function() {
+			var fieldSet = document.querySelector("#guessNum");
 			for (var i = 0; i < Game.prototype.NUMBER_DIGITS; i++) {
-				var fieldSet = document.querySelector("#guessNum");
-				var select = document.createElement("select");
-				select.setAttribute("class", "numSelectBox");
-				for (var j = 0; j < 10; j++) {
-					var option = document.createElement("option");
-					option.setAttribute("value", j);
-					option.innerHTML = j;
-					select.appendChild(option);
-				}
-
-				fieldSet.appendChild(select);
+				var button = document.createElement("button");
+				var img = document.createElement("img");
+				img.setAttribute("src", "img/0.png");
+				img.setAttribute("value", "0");
+				button.setAttribute("class", "numSelectBox");
+				button.setAttribute("id", "rank_" + (i+1));
+				button.addEventListener("click",
+						function(ev){
+					var rankId = ev.currentTarget.id;
+					selectNumMenu(rankId);
+				}, false);
+				button.appendChild(img);
+				fieldSet.appendChild(button);
 			}
+		};
+
+		/**
+		 * 数値選択メニューを表示する
+		 */
+		var selectNumMenu = function(rankId){
+			document.getElementById('overlay').style.display = 'block';
+			var div = document.querySelector("#overlay");
+			while (div.firstChild) {
+				//初期化
+				div.removeChild(div.firstChild);
+			}
+			for (var i = 1; i <= 10; i++) {
+				if(i % 3 === 1){
+					var p = document.createElement("p");
+				}
+				var button = document.createElement("button");
+				var img = document.createElement("img");
+				var num = (i === 10)? 0 : i;
+				img.setAttribute("src", "img/" + num +".png");
+				img.setAttribute("value", num);
+				button.setAttribute("class", "numSelectBox");
+				button.setAttribute("id", "button_" + num);
+				button.addEventListener("click",
+						function(ev){
+					var selectNum = ev.currentTarget.id.slice(-1);
+					onSelectNumMenu(selectNum,rankId);
+				}, false);
+				button.appendChild(img);
+				p.appendChild(button);
+				if(i % 3){
+					div.appendChild(p);
+				}
+			}
+		};
+
+		/**
+		 * 数値選択メニューで値を選択する
+		 */
+		var onSelectNumMenu = function(num,rankId){
+			var button = document.querySelector("#" + rankId);
+			while (button.firstChild) {
+				//初期化
+				button.removeChild(button.firstChild);
+			}
+
+			var img = document.createElement("img");
+			img.setAttribute("src", "img/" + num +".png");
+			img.setAttribute("value", num);
+			button.appendChild(img);
 		};
 
 		/**
@@ -245,14 +301,14 @@ window.onload = function() {
 			for (var i = 0; i < Game.prototype.NUMBER_DIGITS; i++) {
 				if (guess_number === "") {
 					// guess_numberが空なら無条件で1番目の選択値を入力
-					guess_number = node.children[i].options[node.children[i].selectedIndex].value;
+					guess_number = node.children[i].children[0].getAttribute("value");
 					// guess_number_array[0] = guess_number;
 				} else {
 					// guess_numberの2個目以降を考える場合はダブりを考慮する
 					var strs = guess_number.split('');
 					var isDuplication = false; // 重複しているかどうか
 					for (var j = 0; j < strs.length; j++) {
-						if (strs[j] === node.children[i].options[node.children[i].selectedIndex].value) {
+						if (strs[j] === node.children[i].children[0].getAttribute("value")) {
 							isDuplication = true;
 						}
 					}
@@ -261,7 +317,7 @@ window.onload = function() {
 						alert("すべて異なる4桁の数にしてください");
 						return;
 					} else {
-						guess_number += node.children[i].options[node.children[i].selectedIndex].value;
+						guess_number += node.children[i].children[0].getAttribute("value");
 					}
 				}
 			}
