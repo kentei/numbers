@@ -19,7 +19,7 @@ h1.title {
 }
 
 div#overlay {
-  opacity: 0.6;
+  opacity: 0.8;
   display: none;
   position: absolute;
   top: 0;
@@ -52,6 +52,18 @@ button.numSelectBox {
   background: transparent;
 }
 
+div.selectNumMenuBox {
+  margin-top: 100px;
+}
+
+p.selectNumMenu {
+  opacity: 1;
+  background: #233;
+  width: 250px;
+  text-align: center;
+  margin: auto;
+}
+
 button.numSelectBox img{
   display: block;
 }
@@ -64,13 +76,13 @@ div.buttonGroup {
 button.guess {
   font-size: 32px;
   height: 60px;
-  width: 120px;
+  width: 250px;
 }
 
 button.answer {
   font-size: 32px;
   height: 60px;
-  width: 120px;
+  width: 250px;
 }
 
 button.selfPlayer {

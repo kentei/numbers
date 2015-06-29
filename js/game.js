@@ -151,14 +151,17 @@ window.onload = function() {
 		 */
 		var selectNumMenu = function(rankId){
 			document.getElementById('overlay').style.display = 'block';
-			var div = document.querySelector("#overlay");
-			while (div.firstChild) {
+			var overlay = document.querySelector("#overlay");
+			var div = document.createElement("div");
+			div.setAttribute("class","selectNumMenuBox");
+			while (overlay.firstChild) {
 				//初期化
-				div.removeChild(div.firstChild);
+				overlay.removeChild(overlay.firstChild);
 			}
 			for (var i = 1; i <= 10; i++) {
 				if(i % 3 === 1){
 					var p = document.createElement("p");
+					p.setAttribute("class","selectNumMenu")
 				}
 				var button = document.createElement("button");
 				var img = document.createElement("img");
@@ -178,6 +181,7 @@ window.onload = function() {
 					div.appendChild(p);
 				}
 			}
+			overlay.appendChild(div);
 		};
 
 		/**
