@@ -8,5 +8,5 @@ __Localizer.strings = {'numbers_digits_error' : 'Please enter to be different fr
 'numbers_menu_ranking_mode' : 'Ranking',
 'numbers_guess_button_title' : 'Guess',
 'numbers_answer_button_title' : 'Give up',
-'numbers_history_title' : '履歴',
+'numbers_history_title' : 'History',
 }

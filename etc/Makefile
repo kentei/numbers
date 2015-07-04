@@ -1,6 +1,6 @@
-SRC = test1.js test2.js test3.js
-COMBINE = main.js
-COMPRESS = main.min.js
+SRC = ../src/main.js ../src/startMenu.js ../src/game1Player.js
+COMBINE = ../dest/game.js
+COMPRESS = ../dest/game.min.js
 
 all : $(COMPRESS)
 
