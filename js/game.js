@@ -19,17 +19,20 @@ window.onload = function() {
 	'use strict';
 	var StartMenu = function() {
 		this.init = function(){
-			addEvent();
+			buttonSetting();
 		};
 
 		/**
 		 * コンポーネントにイベントを追加する
 		 */
-		var addEvent = function() {
+		var buttonSetting = function() {
 			// ボタンイベント追加
 			var selfPlayerModeButton = document.querySelector('#selfPlayerModeButton');
+			document.getElementById("selfPlayerModeButton").innerHTML = _("numbers_menu_1player_mode");
 			selfPlayerModeButton.addEventListener("click", selfModeClick, false);
 			//TODO ランキングボタンや対戦モードボタンの追加
+			document.getElementById("twoPlayerModeButton").innerHTML = _("numbers_menu_2player_mode");
+			document.getElementById("rankingButton").innerHTML = _("numbers_menu_ranking_mode");
 		};
 
 		/**
@@ -66,9 +69,10 @@ window.onload = function() {
 		 * 初期化処理(public)
 		 */
 		this.init = function() {
+			document.getElementById("historyTitle").innerHTML = _("numbers_history_title");
 			Game.target_number = createRandumNumber();
 			createNumSelectBox();
-			addEvent();
+			buttonSetting();
 			timeCountStartOrStop();  //スタート
 			Game.timer = setInterval(timeCount, 10);
 		};
@@ -203,11 +207,13 @@ window.onload = function() {
 		/**
 		 * コンポーネントにイベントを追加する
 		 */
-		var addEvent = function() {
+		var buttonSetting = function() {
 			// ボタンイベント追加
 			var guessButton = document.querySelector('#guessButton');
+			document.getElementById("guessButton").innerHTML = _("numbers_guess_button_title");
 			guessButton.addEventListener("click", guess, false);
 			var answerButton = document.querySelector('#answerButton');
+			document.getElementById("answerButton").innerHTML = _("numbers_answer_button_title");
 			answerButton.addEventListener("click", answer, false);
 		};
 
@@ -318,7 +324,7 @@ window.onload = function() {
 					}
 					if (isDuplication) {
 						// 重複していたらalertを表示する
-						alert("すべて異なる4桁の数にしてください");
+						alert(_("numbers_digits_error"));
 						return;
 					} else {
 						guess_number += node.children[i].children[0].getAttribute("value");
@@ -330,11 +336,11 @@ window.onload = function() {
 			Game.guessTimes += 1;
 			if (result["isResult"]) {
 				timeCountStartOrStop();
-				alert("正解です");
+				alert(_("numbers_guess_successful"));
 			} else {
-				document.getElementById("history").innerHTML += Game.guessTimes
-				+ "回目:" + guess_number + "　Hit:" + result["HitNum"]
-				+ "　Blow:" + result["BlowNum"] + "<br>";
+				var label = new Label();
+				var fillMsg = [Game.guessTimes, guess_number, result["HitNum"], result["BlowNum"]];
+				document.getElementById("history").innerHTML += label.fillBlank(_("numbers_guess_result_history"),fillMsg) + "<br>"
 			}
 		};
 
@@ -342,11 +348,11 @@ window.onload = function() {
 		 * answerボタンを押下時の処理(private)
 		 */
 		var answer = function() {
-			var end = confirm("答えを表示した場合、ランキング登録はできませんが宜しいですか?");
+			var end = confirm(_("numbers_answer_disp_confirm"));
 			if (end === true) {
 				timeCountStartOrStop();
-				alert("答えは" + Game.target_number
-						+ "でした。\nOKボタンを押すと、新規でゲームがスタートします。");
+				var label = new Label();
+				alert(label.fillBlank(_("numbers_answer_display"),[Game.target_number]));
 				window.location.href = window.location.href;
 			}
 		};
